@@ -144,10 +144,11 @@ class BotCommandAgent(BaseAgent):
     def is_in_front_of_ball(self):
         me_to_goal = (self.me.location - self.foe_goal.location).magnitude()
         ball_to_goal = (self.ball.location - self.foe_goal.location).magnitude()
-        if me_to_goal < ball_to_goal + 1000:
+        if me_to_goal <= ball_to_goal:
             return True
         return False
         
+
     def print_debug(self):
         white = self.renderer.white()
         self.renderer.draw_string_2d(10, 150, 3, 3, self.debug_text, white)
@@ -167,6 +168,8 @@ class BotCommandAgent(BaseAgent):
     def draw_debug_lines(self):
         for line in self.debug_lines:
             self.renderer.draw_line_3d(line.vec1, line.vec2, line.color)
+
+
     
     def run(self):
         # override this with your strategy code

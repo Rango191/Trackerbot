@@ -10,9 +10,11 @@ from util.objects import Routine
 # Unless you know what you're doing :)
 class jumper(Routine):
     def run(self, agent):
-        print('I want to jump', int(agent.time), int(agent.time % 5)) # % (modulo) is like get the remainder when divided by 5
-        if agent.time % 5 == 0:
-            agent.controller.jump = True
+        # print('I want to jump', int(agent.time), int(agent.time % 5)) # % (modulo) is like get the remainder when divided by 5
+        #if agent.time % 5 == 0:
+        agent.controller.jump = True
+        agent.controller.jump = False
+        
     
 
 
