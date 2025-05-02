@@ -35,7 +35,7 @@ class Bot(BotCommandAgent):
                 return
 
 
-
+#jfdsjgadunmzk.fljesuo;kjgd[vos]
 
 
         # white = self.renderer.white()
