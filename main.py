@@ -20,6 +20,7 @@ class Bot(BotCommandAgent):
         target_boost = self.get_closest_large_boost()
         distance_difference = 5120 + abs(self.me.location.y)
         retreat_distance = 0
+        x_value_recovery = 0
 
         def find_best_shot():
             targets = {
@@ -59,8 +60,12 @@ class Bot(BotCommandAgent):
                 retreat_distance = 500
             elif distance_difference >= 10200:
                 retreat_distance = 50
+            if self.ball.location.x < 4100 and self.ball.location.x >= 0:
+                x_value_recovery = -50
+            if self.ball.location.x > -4100 and self.ball.location.x < 0:
+                x_value_recovery = 50
             y_value_recovery = self.ball.location.y - (retreat_distance)
-            retreat_location = Vector3(self.ball.location.x, y_value_recovery, 0)
+            retreat_location = Vector3(self.ball.location.x + x_value_recovery , y_value_recovery, 0)
             if abs(y_value_recovery) >= 5110:
                 self.set_intent(atba())
             else:
@@ -72,7 +77,7 @@ class Bot(BotCommandAgent):
 
 
 
-        ball_to_friendgoal = (self.ball.location - self.friend_goal.location).magnitude()
+        ball_to_friendgoal = (self.friend_goal.location + abs(self.ball.location)).magnitude()
 
         if ball_to_friendgoal < 1000:
             self.set_intent(goto(self.friend_goal.location))
@@ -87,7 +92,7 @@ class Bot(BotCommandAgent):
             # self.add_debug_line('ball_to_net', self.ball.location, shot_location, [0, 0, 255])
             # self.debug_intent()
             return
-        if  target_boost is not None and self.me.boost < 10 and self.get_intent() is None:
+        if  target_boost is not None and self.me.boost < 20 and ball_to_friendgoal >= 500:
             boost_location = target_boost.location
             self.set_intent(goto(boost_location))
             # self.debug_text = 'getting boost'
