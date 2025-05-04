@@ -67,7 +67,7 @@ class Bot(BotCommandAgent):
             y_value_recovery = self.ball.location.y - (retreat_distance)
             retreat_location = Vector3(self.ball.location.x + x_value_recovery , y_value_recovery, 0)
             if abs(y_value_recovery) >= 5110:
-                self.set_intent(atba())
+                self.set_intent(goto(self.ball.location))
             else:
                 self.set_intent(goto(retreat_location))
                 # self.debug_text = 'retreating'
@@ -92,7 +92,7 @@ class Bot(BotCommandAgent):
             # self.add_debug_line('ball_to_net', self.ball.location, shot_location, [0, 0, 255])
             # self.debug_intent()
             return
-        if  target_boost is not None and self.me.boost < 20 and ball_to_friendgoal >= 500:
+        if  target_boost is not None and self.me.boost < 30 and ball_to_friendgoal >= 500:
             boost_location = target_boost.location
             self.set_intent(goto(boost_location))
             # self.debug_text = 'getting boost'
