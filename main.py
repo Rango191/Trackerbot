@@ -39,17 +39,9 @@ class Bot(BotCommandAgent):
 
 
 
-        # white = self.renderer.white()
-        # self.renderer.draw_line_3d(self.me.location, self.ball.location, white)
-        #if self.get_intent() is not None:
-        #self.debug_intent()
-            #return
+
         if self.kickoff_flag:
-            # self.clear_debug_lines()
             self.set_intent(kickoff())
-            # self.debug_intent()
-            # self.add_debug_line('me_to_kickoff', self.me.location, self.ball.location, [0, 0, 255])
-            # self.add_debug_line('kickoff_to_goal', self.ball.location, self.foe_goal.location, [0, 0, 255])
             return
 
         # self.clear_debug_lines()
@@ -98,11 +90,20 @@ class Bot(BotCommandAgent):
             # self.debug_text = 'getting boost'
             # self.add_debug_line('getting boost', self.me.location, boost_location, [0, 255, 0])
             # self.debug_intent()
-            # return
+            return
 
         find_best_shot()
 
-        # targets = {
+  
+        if self.ball.location.z - 10 > self.me.location.z and self.ball.location.x <= self.me.location.x + 100 and self.ball.location.y <= self.me.location.z + 200:
+           self.set_intent(jump_shot(self.ball.location, self.time, self.foe_goal.location, 3))
+           return
+
+        # if len(available_boosts) > 0:
+        #     self.set_intent(goto(available_boosts[0].location))
+        #     return
+
+      # targets = {
         #     'at_opponent_goal': (self.foe_goal.left_post, self.foe_goal.right_post),
         #     'away_from_our_net': (self.friend_goal.right_post, self.friend_goal.left_post)
         # }
@@ -116,15 +117,12 @@ class Bot(BotCommandAgent):
 
         #############
 
-        if self.ball.location.z - 10 > self.me.location.z and self.ball.location.x <= self.me.location.x + 100 and self.ball.location.y <= self.me.location.z + 200:
-           self.set_intent(jump_shot(self.ball.location, self.time, self.foe_goal.location, 3))
-           return
 
-        # if len(available_boosts) > 0:
-        #     self.set_intent(goto(available_boosts[0].location))
-        #     return
-
-
+        # white = self.renderer.white()
+        # self.renderer.draw_line_3d(self.me.location, self.ball.location, white)
+        #if self.get_intent() is not None:
+        #self.debug_intent()
+            #return
 
         # targets = {
         #     'at_opponent_goal': (self.foe_goal.left_post, self.foe_goal.right_post),
@@ -145,7 +143,16 @@ class Bot(BotCommandAgent):
         # self.set_intent(short_shot(self.foe_goal.location))
 
 
-#print(f'my x position is: {self.me.location.x}')
+# #print(f'my x position is: {self.me.location.x}')
 
+#      if self.kickoff_flag:
+#             # self.clear_debug_lines()
+#             self.set_intent(kickoff())
+#             # self.debug_intent()
+#             # self.add_debug_line('me_to_kickoff', self.me.location, self.ball.location, [0, 0, 255])
+#             # self.add_debug_line('kickoff_to_goal', self.ball.location, self.foe_goal.location, [0, 0, 255])
+#             return
+
+#         # self.clear_debug_lines()
 
 
