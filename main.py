@@ -84,7 +84,7 @@ class Bot(BotCommandAgent):
             # self.add_debug_line('ball_to_net', self.ball.location, shot_location, [0, 0, 255])
             # self.debug_intent()
             return
-        if  target_boost is not None and self.me.boost < 30 and ball_to_friendgoal >= 500:
+        if  target_boost is not None and self.me.boost < 30 and ball_to_friendgoal >= 1000:
             boost_location = target_boost.location
             self.set_intent(goto(boost_location))
             # self.debug_text = 'getting boost'
